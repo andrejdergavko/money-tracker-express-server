@@ -9,6 +9,8 @@ import { ITransactionsController } from './transactions/transactions.controller.
 import { TransactionsController } from './transactions/transactions.controller';
 import { ITransactionsService } from './transactions/transactions.service.interface';
 import { TransactionsService } from './transactions/transactions.service';
+import { IExaptionFilter } from './errors/exaption.filter.interface';
+import { ExaptionFilter } from './errors/exaption.filter';
 
 export interface IBootstrapReturn {
   app: App;
@@ -19,6 +21,7 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<ILogger>(TYPES.Logger).to(LoggerService);
   bind<ITransactionsController>(TYPES.TransactionsController).to(TransactionsController);
   bind<ITransactionsService>(TYPES.TransactionsService).to(TransactionsService);
+  bind<IExaptionFilter>(TYPES.ExaptionFilter).to(ExaptionFilter);
 
   bind<App>(TYPES.Application).to(App);
 });

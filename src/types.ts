@@ -3,4 +3,5 @@ export const TYPES = {
   Logger: Symbol.for('Logger'),
   TransactionsController: Symbol.for('TransactionsController'),
   TransactionsService: Symbol.for('TransactionsService'),
+  ExaptionFilter: Symbol.for('ExaptionFilter'),
 };

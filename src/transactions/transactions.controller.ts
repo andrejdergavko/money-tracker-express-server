@@ -6,6 +6,7 @@ import { TYPES } from '../types';
 import { ITransactionsController } from './transactions.controller.interface';
 import { NextFunction, Request, Response, Router } from 'express';
 import { ITransactionsService } from './transactions.service.interface';
+import { HTTPError } from '../errors/http-error.class';
 
 @injectable()
 export class TransactionsController extends BaseController implements ITransactionsController {
@@ -29,7 +30,7 @@ export class TransactionsController extends BaseController implements ITransacti
     const result = await this.transactionsService.getTransactions();
 
     if (!result) {
-      // return next(new HTTPError(422, 'User already exists'));
+      return next(new HTTPError(422, 'Error while getting transactions'));
     }
 
     res.send(result);
