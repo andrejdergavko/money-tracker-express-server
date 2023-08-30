@@ -3,6 +3,8 @@ import 'reflect-metadata';
 
 import { TYPES } from './types';
 import { App } from './app';
+import { ILogger } from './logger/logger.interface';
+import { LoggerService } from './logger/logger.service';
 
 export interface IBootstrapReturn {
   app: App;
@@ -10,6 +12,7 @@ export interface IBootstrapReturn {
 }
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
+  bind<ILogger>(TYPES.Logger).to(LoggerService);
   bind<App>(TYPES.Application).to(App);
 });
 
