@@ -1,6 +1,9 @@
 import express, { Express } from 'express';
 import { Server } from 'http';
+import { injectable } from 'inversify';
+import 'reflect-metadata';
 
+@injectable()
 export class App {
   app: Express;
   server: Server;
