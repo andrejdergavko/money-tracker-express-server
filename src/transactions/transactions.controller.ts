@@ -20,17 +20,33 @@ export class TransactionsController extends BaseController implements ITransacti
       {
         path: '/',
         method: 'get',
-        func: this.getAllTransactions,
+        func: this.getTransactions,
+        middlewares: [],
+      },
+      {
+        path: '/',
+        method: 'post',
+        func: this.addTransactions,
         middlewares: [],
       },
     ]);
   }
 
-  async getAllTransactions(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async getTransactions(req: Request, res: Response, next: NextFunction): Promise<void> {
     const result = await this.transactionsService.getTransactions();
 
     if (!result) {
       return next(new HTTPError(422, 'Error while getting transactions'));
+    }
+
+    res.send(result);
+  }
+
+  async addTransactions(req: Request, res: Response, next: NextFunction): Promise<void> {
+    const result = await this.transactionsService.addTransactions(req.body);
+
+    if (!result) {
+      return next(new HTTPError(422, 'Error while adding transactions'));
     }
 
     res.send(result);
