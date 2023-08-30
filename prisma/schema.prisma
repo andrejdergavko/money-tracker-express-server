@@ -10,9 +10,25 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model UserModel {
-  id        Int   @id @default(autoincrement())
-  email     String
-  password  String
-  name      String
+model Transaction {
+  uuid           String    @id @default(uuid())
+  userId         String
+  date           String
+  currency       String
+  description    String?
+  amount         Float
+  amountInUsd    Float
+  bank           String
+  categoryUuid   String?
+  category       Category? @relation(fields: [categoryUuid], references: [uuid])
+
+  @@index([categoryUuid])
+  @@index([userId])
+}
+
+model Category {
+  uuid         String        @id @default(uuid())
+  label        String        @unique
+  color        String
+  transactions Transaction[]
 }
