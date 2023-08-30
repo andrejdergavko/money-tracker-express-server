@@ -4,4 +4,5 @@ export const TYPES = {
   TransactionsController: Symbol.for('TransactionsController'),
   TransactionsService: Symbol.for('TransactionsService'),
   ExaptionFilter: Symbol.for('ExaptionFilter'),
+  PrismaService: Symbol.for('PrismaService'),
 };

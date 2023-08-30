@@ -11,6 +11,7 @@ import { ITransactionsService } from './transactions/transactions.service.interf
 import { TransactionsService } from './transactions/transactions.service';
 import { IExaptionFilter } from './errors/exaption.filter.interface';
 import { ExaptionFilter } from './errors/exaption.filter';
+import { PrismaService } from './database/prisma.service';
 
 export interface IBootstrapReturn {
   app: App;
@@ -22,6 +23,7 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<ITransactionsController>(TYPES.TransactionsController).to(TransactionsController);
   bind<ITransactionsService>(TYPES.TransactionsService).to(TransactionsService);
   bind<IExaptionFilter>(TYPES.ExaptionFilter).to(ExaptionFilter);
+  bind<PrismaService>(TYPES.PrismaService).to(PrismaService);
 
   bind<App>(TYPES.Application).to(App);
 });
