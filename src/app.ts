@@ -4,6 +4,7 @@ import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
 import { TYPES } from './types';
 import { ILogger } from './logger/logger.interface';
+import { ITransactionsController } from './transactions/transactions.controller.interface';
 
 @injectable()
 export class App {
@@ -11,14 +12,19 @@ export class App {
   server: Server;
   port: number;
 
-  constructor(@inject(TYPES.Logger) private logger: ILogger) {
+  constructor(
+    @inject(TYPES.Logger) private logger: ILogger,
+    @inject(TYPES.TransactionsController) private transactionsController: ITransactionsController,
+  ) {
     this.app = express();
     this.port = 8000;
   }
 
   useMiddleware(): void {}
 
-  useRoutes(): void {}
+  useRoutes(): void {
+    this.app.use('/transactions', this.transactionsController.router);
+  }
 
   useExaptionFilters(): void {}
 
